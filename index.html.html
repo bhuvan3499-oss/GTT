@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Geetha Ladies Tailor – Master Craftsmanship</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --rose:       #c0455f;
+      --rose-light: #e8a0b0;
+      --gold:       #c9a227;
+      --gold-light: #f0d98a;
+      --cream:      #fdf6ee;
+      --deep:       #1a0a10;
+      --muted:      #7a5360;
+      --card-bg:    #fff9f4;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--deep);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(253,246,238,.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(192,69,95,.15);
+      z-index: 100;
+      animation: fadeDown .8s ease both;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--rose);
+      letter-spacing: .04em;
+    }
+    .nav-logo span { font-style: italic; color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: .82rem;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .3s;
+    }
+    .nav-links a:hover { color: var(--rose); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 5rem 6rem 6rem;
+      animation: fadeLeft .9s .2s ease both;
+    }
+    .hero-tag {
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 2.5rem; height: 1px;
+      background: var(--gold);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1.1;
+      color: var(--deep);
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--rose); display: block; }
+    .hero-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 28rem;
+      margin-bottom: 2.8rem;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: .9rem;
+      background: var(--rose);
+      color: #fff;
+      padding: .9rem 2.2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: .82rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background .3s, transform .3s;
+      width: fit-content;
+    }
+    .hero-cta:hover { background: #a03350; transform: translateY(-2px); }
+
+    .hero-visual {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #f5d8df 0%, #faecd7 100%);
+      animation: fadeRight .9s .3s ease both;
+    }
+    .hero-visual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: 100%;
+      gap: 6px;
+      padding: 6px;
+    }
+    .hero-img { overflow: hidden; position: relative; }
+    .hero-img:first-child { grid-row: 1 / 3; }
+    .hero-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .6s ease;
+    }
+    .hero-img:hover img { transform: scale(1.06); }
+
+    .badge {
+      position: absolute; bottom: 2rem; right: 2rem;
+      background: var(--deep);
+      color: #fff;
+      border-radius: 50%;
+      width: 110px; height: 110px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      font-size: .62rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      animation: spin 18s linear infinite;
+    }
+    .badge-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--gold-light);
+      animation: spin 18s linear infinite reverse;
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem; }
+    .section-tag {
+      font-size: .7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: .7rem;
+    }
+    .section-tag::before {
+      content: '';
+      width: 2rem; height: 1px;
+      background: var(--gold);
+      display: inline-block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 36rem;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    /* GALLERY */
+    #gallery {
+      background: var(--deep);
+      color: var(--cream);
+      padding: 6rem;
+    }
+    #gallery .section-tag { color: var(--gold-light); }
+    #gallery .section-tag::before { background: var(--gold-light); }
+    #gallery .section-title { color: var(--cream); }
+    #gallery .section-sub { color: rgba(253,246,238,.55); }
+
+    .gallery-filter {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 2.8rem;
+    }
+    .filter-btn {
+      padding: .45rem 1.4rem;
+      border-radius: 50px;
+      border: 1px solid rgba(253,246,238,.2);
+      background: transparent;
+      color: rgba(253,246,238,.6);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .3s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--rose);
+      border-color: var(--rose);
+      color: #fff;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 280px;
+      gap: 10px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.08); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,10,16,.75) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity .4s;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.4rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: .25rem;
+    }
+    .gallery-overlay p {
+      font-size: .72rem;
+      color: var(--rose-light);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    /* SERVICES */
+    #services { background: var(--cream); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .service-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(192,69,95,.12);
+      border-radius: 8px;
+      padding: 2.4rem 2rem;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(192,69,95,.12);
+    }
+    .service-icon { font-size: 2rem; margin-bottom: 1.2rem; }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: .75rem;
+    }
+    .service-card p { font-size: .9rem; color: var(--muted); line-height: 1.7; }
+
+    /* TESTIMONIALS */
+    #testimonials {
+      background: linear-gradient(135deg, #fdf0f3 0%, #fdf6ee 100%);
+      text-align: center;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .testimonial-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 30px rgba(192,69,95,.08);
+      text-align: left;
+    }
+    .stars { color: var(--gold); font-size: 1rem; margin-bottom: 1rem; }
+    .testimonial-card p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 1.4rem;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: .8rem; }
+    .avatar-placeholder {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; color: #fff;
+      flex-shrink: 0;
+    }
+    .author-info strong { display: block; font-size: .9rem; font-weight: 500; }
+    .author-info span { font-size: .75rem; color: var(--muted); }
+
+    /* CONTACT */
+    #contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding: 0;
+    }
+    .contact-info {
+      padding: 6rem;
+      background: var(--deep);
+      color: var(--cream);
+    }
+    .contact-info .section-tag { color: var(--gold-light); }
+    .contact-info .section-tag::before { background: var(--gold-light); }
+    .contact-info .section-title { color: var(--cream); }
+    .contact-detail { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.8rem; }
+    .contact-icon {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: rgba(192,69,95,.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-detail h4 { font-size: .72rem; letter-spacing: .15em; text-transform: uppercase; color: var(--rose-light); margin-bottom: .3rem; }
+    .contact-detail p { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: rgba(253,246,238,.85); line-height: 1.5; }
+
+    .contact-form { padding: 6rem; background: var(--cream); }
+    .form-group { margin-bottom: 1.4rem; }
+    .form-group label { display: block; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .5rem; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: .85rem 1.1rem;
+      border: 1px solid rgba(192,69,95,.2);
+      border-radius: 6px;
+      background: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem; color: var(--deep);
+      outline: none; transition: border-color .3s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--rose); }
+    .form-group textarea { resize: vertical; height: 120px; }
+    .submit-btn {
+      background: var(--rose); color: #fff;
+      border: none; padding: .95rem 2.4rem;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem; font-weight: 500;
+      letter-spacing: .1em; text-transform: uppercase;
+      cursor: pointer; transition: background .3s, transform .3s; width: 100%;
+    }
+    .submit-btn:hover { background: #a03350; transform: translateY(-2px); }
+
+    footer {
+      background: var(--deep);
+      color: rgba(253,246,238,.5);
+      text-align: center;
+      padding: 2rem 4rem;
+      font-size: .78rem;
+      letter-spacing: .06em;
+    }
+    footer span { color: var(--rose-light); }
+
+    .thread-line {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--rose), var(--gold), var(--rose), transparent);
+      opacity: .35;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(26,10,16,.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 80vw; max-height: 80vh;
+      object-fit: contain; border-radius: 6px;
+      box-shadow: 0 30px 100px rgba(0,0,0,.5);
+    }
+    .lightbox-close {
+      position: absolute; top: 1.5rem; right: 2rem;
+      color: #fff; font-size: 2.5rem; cursor: pointer;
+      background: none; border: none; line-height: 1; transition: color .3s;
+    }
+    .lightbox-close:hover { color: var(--rose); }
+    .lightbox-caption {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      color: rgba(253,246,238,.7);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; text-align: center;
+    }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 1.5rem; margin: 1rem 0 3rem; }
+    .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: rgba(192,69,95,.2); }
+
+    /* ANIMATIONS */
+    @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:none; } }
+    @keyframes fadeLeft { from { opacity:0; transform:translateX(-30px); } to { opacity:1; transform:none; } }
+    @keyframes fadeRight { from { opacity:0; transform:translateX(30px); } to { opacity:1; transform:none; } }
+    @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      nav { padding: 1rem 2rem; }
+      .nav-links { gap: 1.2rem; }
+      section { padding: 4rem 2rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-text { padding: 4rem 2rem; }
+      .hero-visual { height: 60vw; min-height: 300px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item.tall { grid-row: span 1; }
+      .gallery-item.wide { grid-column: span 1; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      #contact { grid-template-columns: 1fr; }
+      .contact-info, .contact-form { padding: 4rem 2rem; }
+      #gallery { padding: 4rem 2rem; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Geetha <span>Ladies Tailor</span></div>
+    <ul class="nav-links">
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <div class="hero-tag">Est. 2005 · Bengaluru</div>
+      <h1>Where Every <em>Stitch Tells a Story</em></h1>
+      <p class="hero-desc">
+        Handcrafted elegance by our master tailor — from silk blouses to intricate salwars, every garment is a labour of love.
+      </p>
+      <a href="#gallery" class="hero-cta">
+        View Our Work &nbsp;→
+      </a>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual-grid">
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80" alt="Silk Blouse"/>
+        </div>
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=500&q=80" alt="Salwar Kameez"/>
+        </div>
+        <div class="hero-img">
+          <img src="https://images.unsplash.com/photo-1617627143233-4df547197063?w=500&q=80" alt="Embroidered Kurti"/>
+        </div>
+      </div>
+      <div class="badge">
+        <span class="badge-num">18+</span>
+        <span style="font-size:.55rem;margin-top:.2rem;">Years of Craft</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="thread-line"></div>
+
+  <!-- GALLERY -->
+  <section id="gallery">
+    <div class="section-tag">Our Portfolio</div>
+    <h2 class="section-title">Master Tailor's <br/>Finest Creations</h2>
+    <p class="section-sub">Each piece stitched with precision, passion and decades of expertise in ladies' fashion.</p>
+
+    <div class="gallery-filter">
+      <button class="filter-btn active" data-filter="all">All Work</button>
+      <button class="filter-btn" data-filter="blouse">Blouses</button>
+      <button class="filter-btn" data-filter="salwar">Salwar Suits</button>
+      <button class="filter-btn" data-filter="lehenga">Lehenga &amp; Skirts</button>
+      <button class="filter-btn" data-filter="kurti">Kurtis</button>
+      <button class="filter-btn" data-filter="gown">Gowns</button>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item tall reveal" data-cat="blouse" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=700&q=85" alt="Silk Blouse"/>
+        <div class="gallery-overlay"><h3>Silk Zardosi Blouse</h3><p>Blouses</p></div>
+      </div>
+      <div class="gallery-item reveal" data-cat="salwar" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=85" alt="Salwar Kameez"/>
+        <div class="gallery-overlay"><h3>Anarkali Salwar Set</h3><p>Salwar Suits</p></div>
+      </div>
+      <div class="gallery-item reveal" data-cat="kurti" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1617627143233-4df547197063?w=600&q=85" alt="Kurti"/>
+        <div class="gallery-overlay"><h3>Block Print Kurti</h3><p>Kurtis</p></div>
+      </div>
+      <div class="gallery-item wide reveal" data-cat="lehenga" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1600092373647-17d4f0d4b3ab?w=800&q=85" alt="Lehenga"/>
+        <div class="gallery-overlay"><h3>Bridal Lehenga Choli</h3><p>Lehenga &amp; Skirts</p></div>
+      </div>
+      <div class="gallery-item tall reveal" data-cat="gown" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=700&q=85" alt="Gown"/>
+        <div class="gallery-overlay"><h3>Indo-Western Gown</h3><p>Gowns</p></div>
+      </div>
+      <div class="gallery-item reveal" data-cat="blouse" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1590650046871-92c887180603?w=600&q=85" alt="Designer Blouse"/>
+        <div class="gallery-overlay"><h3>Mirror Work Blouse</h3><p>Blouses</p></div>
+      </div>
+      <div class="gallery-item reveal" data-cat="kurti" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=600&q=85" alt="Embroidered Kurti"/>
+        <div class="gallery-overlay"><h3>Chikankari Kurti</h3><p>Kurtis</p></div>
+      </div>
+      <div class="gallery-item reveal" data-cat="salwar" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1614676471928-2ed0ad1061a4?w=600&q=85" alt="Patiala Salwar"/>
+        <div class="gallery-overlay"><h3>Patiala Salwar Set</h3><p>Salwar Suits</p></div>
+      </div>
+      <div class="gallery-item reveal" data-cat="gown" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=600&q=85" alt="Evening Gown"/>
+        <div class="gallery-overlay"><h3>Silk Evening Gown</h3><p>Gowns</p></div>
+      </div>
+      <div class="gallery-item reveal" data-cat="lehenga" onclick="openLightbox(this)">
+        <img src="https://images.unsplash.com/photo-1596803244897-d2aecbb23765?w=600&q=85" alt="Skirt"/>
+        <div class="gallery-overlay"><h3>Tiered Chaniya Choli</h3><p>Lehenga &amp; Skirts</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="thread-line"></div>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-tag">What We Offer</div>
+    <h2 class="section-title">Our Tailoring Services</h2>
+    <div class="divider"><span>✂️</span></div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">👗</div>
+        <h3>Custom Stitching</h3>
+        <p>Salwar suits, blouses, kurtis, skirts and more — all stitched to your exact measurements with the finest finish.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💍</div>
+        <h3>Bridal Wear</h3>
+        <p>Exquisite bridal blouses, lehenga cholis and saree draping assistance crafted for your most special day.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">✨</div>
+        <h3>Embroidery &amp; Embellishments</h3>
+        <p>Zardosi, mirror work, thread embroidery and stone setting — added with care to elevate your garments.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🔧</div>
+        <h3>Alterations &amp; Repairs</h3>
+        <p>Letting out, taking in, hemming, or repairing — we restore your beloved outfits to a perfect fit.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🎓</div>
+        <h3>Uniform Stitching</h3>
+        <p>School uniforms, workwear and institutional clothing stitched neatly with consistent sizing and quality.</p>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🕒</div>
+        <h3>Express Delivery</h3>
+        <p>Need it urgently? We offer express tailoring services to meet tight deadlines without compromising quality.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="thread-line"></div>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-tag" style="justify-content:center">Customer Love</div>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <p class="section-sub" style="margin:0 auto 0">Real words from ladies who trust Geetha aunty with their finest outfits.</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Got my wedding blouse stitched here — the zardosi work was absolutely stunning. Everyone at the reception was asking where I got it done!"</p>
+        <div class="testimonial-author">
+          <div class="avatar-placeholder">P</div>
+          <div class="author-info"><strong>Priya Anand</strong><span>Bride, Vidyaranyapura</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"I've been coming to Geetha aunty for 10 years now. Her stitching quality and the fit she gives is unmatched anywhere in Bengaluru!"</p>
+        <div class="testimonial-author">
+          <div class="avatar-placeholder">S</div>
+          <div class="author-info"><strong>Sudha Krishnan</strong><span>Regular Customer, Hebbal</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"She stitched 3 salwar sets for me in just 4 days. On time, perfectly fitted and the finishing was superb. Will always recommend her!"</p>
+        <div class="testimonial-author">
+          <div class="avatar-placeholder">R</div>
+          <div class="author-info"><strong>Rekha Nair</strong><span>Teacher, Bengaluru</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-info">
+      <div class="section-tag">Find Us</div>
+      <h2 class="section-title" style="color:var(--cream)">Come Visit <br/><em style="font-style:italic;color:var(--rose-light)">the shop</em></h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:rgba(253,246,238,.6);line-height:1.7;margin:1rem 0 2.5rem">Walk in with your cloth, your measurements, and your vision — we'll handle the rest.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div><h4>Address</h4><p>1195, 1st Main 2nd Block BEL Layout, Vidyaranyapura<br/>Bengaluru – 560 097</p></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📞</div>
+        <div><h4>Phone</h4><p>+91 7984685375</p></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">🕐</div>
+        <div><h4>Working Hours</h4><p>Mon – Sat: 9:00 AM – 9:00 PM<br/>Sunday: 10:00 AM – 2:00 PM</p></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📱</div>
+        <div><h4>WhatsApp</h4><p>+91 7984685375</p></div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="section-tag">Book a Consultation</div>
+      <h2 class="section-title">Get in Touch</h2>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--muted);line-height:1.7;margin:1rem 0 2rem">Send us your requirements and we'll get back to you within 24 hours.</p>
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="e.g. Kavitha Sharma"/>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91 XXXXX XXXXX"/>
+      </div>
+      <div class="form-group">
+        <label>Service Required</label>
+        <select>
+          <option value="">Select a service…</option>
+          <option>Blouse Stitching</option>
+          <option>Salwar Suit</option>
+          <option>Bridal Wear</option>
+          <option>Kurti / Top</option>
+          <option>Lehenga / Skirt</option>
+          <option>Alteration / Repair</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Message</label>
+        <textarea placeholder="Describe the garment, design, or any special requirements…"></textarea>
+      </div>
+      <button class="submit-btn" onclick="handleSubmit()">Send Enquiry ✂️</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 <span>Geetha Ladies Tailor</span> · Bengaluru · Crafted with ❤️ &amp; thread</p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <img id="lightbox-img" src="" alt=""/>
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Gallery filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.gallery-item').forEach(item => {
+          item.style.display = (filter === 'all' || item.dataset.cat === filter) ? '' : 'none';
+        });
+      });
+    });
+
+    // Lightbox
+    function openLightbox(el) {
+      const img = el.querySelector('img');
+      const cap = el.querySelector('.gallery-overlay h3');
+      document.getElementById('lightbox-img').src = img.src.replace(/w=\d+/, 'w=1400');
+      document.getElementById('lightbox-caption').textContent = cap ? cap.textContent : '';
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(e) {
+      if (!e || e.target === document.getElementById('lightbox') || e.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox({target: document.getElementById('lightbox')}); });
+
+    function handleSubmit() {
+      alert('Thank you! Your enquiry has been sent to Geetha Ladies Tailor. We will contact you within 24 hours. 🧵');
+    }
+  </script>
+</body>
+</html>
